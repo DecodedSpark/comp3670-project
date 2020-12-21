@@ -1,23 +1,18 @@
-import org.pcap4j.core.*;
-import org.pcap4j.packet.*;
-import org.pcap4j.packet.namednumber.*;
-import org.pcap4j.core.PcapNetworkInterface.PromiscuousMode;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
 import java.io.*;
 //job seeker waits for jobSeeker to connect, accepts job request, does job, reports back
-public class A3JobSeeker { //server
+public class FPJobSeeker { //server
     public static void main(String[] args) throws IOException {
-        String jobString;
+        String jobString = "0";
         String jobIp;
         String jobPort;
         boolean badJob = false;
         boolean jobDone = false;
         //code to incorporate pcap4j packet building
-        IcmpV4EchoPacket.Builder echoBuilder = new IcmpV4EchoPacket.Builder();
+        /*IcmpV4EchoPacket.Builder echoBuilder = new IcmpV4EchoPacket.Builder();
         echoBuilder
                 .identifier((short) 1);
 
@@ -27,17 +22,16 @@ public class A3JobSeeker { //server
                 .code(IcmpV4Code.NO_CODE)
                 .payloadBuilder(echoBuilder)
                 .correctChecksumAtBuild(true);
+        */        
         //code for connection
-        int[] servers[ 3] ={
-            4999, 4998, 4997
-        } ;//allows 3 different sockets for 3 different JobSeekers
+        //int[] servers ={4999, 4998, 4997} ;//allows 3 different sockets for 3 different JobSeekers
         int i = 0;
         //start connection
         Socket s = new Socket();
         //loop for multiple JobSeekers
         while (i < 3) {
             try {
-                ServerSocket ss = new ServerSocket(servers[i]);
+                ServerSocket ss = new ServerSocket(4999);
                 s = ss.accept();
                 //server can only connect to one client at a time
                 System.out.println("JobCreator connected. Waiting for Job...");
@@ -78,7 +72,7 @@ public class A3JobSeeker { //server
                         pr.flush();
                     } else {
                         //prep pcap4j for packet building
-                        IpV4Packet.Builder ipv4Builder = new IpV4Packet.Builder();
+                        /*IpV4Packet.Builder ipv4Builder = new IpV4Packet.Builder();
                         try {
                             ipv4Builder
                                     .version(IpVersion.IPV4)
@@ -93,7 +87,7 @@ public class A3JobSeeker { //server
                                     .correctLengthAtBuild(true);
                         } catch (UnknownHostException e) {
                             e.printStackTrace();
-                        }
+                        }*/
                         //do the job based on job type
                         //assign part of create-assign-execute-report process for each job
                         switch (jobString) {
@@ -135,7 +129,7 @@ public class A3JobSeeker { //server
                             case "3":
                                 //assign 3rd job to JobSeeker, Q2 Job 1
                                 //execute part of create-assign-execute-report process for A3P2Q2 Job 1
-                                InetAddress localHost = InetAddress.getLocalHost();
+                                /*InetAddress localHost = InetAddress.getLocalHost();
                                 Packet p = ipv4Builder.build();
                                 //create handle
                                 PcapNetworkInterface nif = Pcaps.getDevByAddress(localHost);
@@ -155,12 +149,12 @@ public class A3JobSeeker { //server
                                     } catch (PcapNativeException | NotOpenException e) {
                                         e.printStackTrace();
                                     }
-                                }
+                                }*/
                                 break;
                             case "4":
                                 //assign 4th job to JobSeeker, Q2 Job 2
                                 //execute part of create-assign-execute-report process for A3P2Q2 Job 2
-                                InetAddress localHost = InetAddress.getLocalHost();
+                                /*InetAddress localHost = InetAddress.getLocalHost();
                                 //create tcp packet
                                 Packet tcpp;
                                 tcpp.getBuilder().get(TcpPacket.Builder.class).srcAddr(tcpp.get(IpV4Packet.class).getHeader().getSrcAddr());
@@ -185,7 +179,7 @@ public class A3JobSeeker { //server
                                     } catch (PcapNativeException | NotOpenException e) {
                                         e.printStackTrace();
                                     }
-                                }
+                                }*/
                                 break;
                             default:
                                 pr.println("Error. Job not assigned.");
@@ -207,7 +201,7 @@ public class A3JobSeeker { //server
                 System.out.println("Error. JobCreator disconnected.");
             }
             //if job type is 1 or 2, there is only 1 JobSeeker, so exit while loop
-            if (jobType.equalsIgnoreCase("1") || jobType.equalsIgnoreCase("2")) {
+            if (jobString.equalsIgnoreCase("1") || jobString.equalsIgnoreCase("2")) {
                 i = 3;
             }
             //otherwise go to next JobSeeker for job types 3 and 4
