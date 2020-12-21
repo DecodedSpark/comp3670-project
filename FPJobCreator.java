@@ -44,7 +44,7 @@ public class FPJobCreator {
                 pr.flush();
                 //get ip address from user
                 System.out.println("Enter an IP Address/host name:");
-                if (!jobType.equalsIgnoreCase("7") && !jobType.equalsIgnoreCase("8")) {
+                if (!jobType.equalsIgnoreCase("3") && !jobType.equalsIgnoreCase("7")) {
                     ip = sc2.nextLine();
                 }
                 else {
@@ -54,7 +54,7 @@ public class FPJobCreator {
                 pr.println(ip);
                 pr.flush();
                 //If job type is neither 1 nor 5, get port number from user
-                if (!jobType.equalsIgnoreCase("1") && !jobType.equalsIgnoreCase("7") && !jobType.equalsIgnoreCase("8")) {
+                if (!jobType.equalsIgnoreCase("1") && !jobType.equalsIgnoreCase("3") && !jobType.equalsIgnoreCase("7")) {
                     System.out.println("Enter a port number:");
                     port = sc3.nextInt();
                     pr.println(port);
@@ -81,7 +81,7 @@ public class FPJobCreator {
                 System.out.println("Connection failed. Abort");
             }
             //if job type is neither 3 or 4, there is only 1 JobSeeker, so exit while loop
-            if (!jobType.equalsIgnoreCase("3") && !jobType.equalsIgnoreCase("4")) {
+            if (!jobType.equalsIgnoreCase("4") && !jobType.equalsIgnoreCase("7")) {
                 i = 3;
             }
             //otherwise go to next JobSeeker for job types 3 and 4
