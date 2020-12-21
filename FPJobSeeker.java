@@ -11,24 +11,11 @@ import java.io.IOException;
 public class FPJobSeeker { //server
 
     public static void spyNeighbors(String subnet) throws IOException {
-        int timeout = 1000;
         System.out.println("NOTE:\tYou can only find the MAC Address of the localhost using Java, not those of remote hosts in the same network."
         + "\n\tThat means that JobSeeker.java cannot report the MAC addresses of other live hosts sharing its LAN, it can only report their IP addresses.\n");
         for (int i = 1; i < 255; i++) {
             String host = subnet + "." + i;//get ip address
-            
-            if (InetAddress.getByName(host).isReachable(timeout)) {
-                //code to find MAC address of given host IP
-                /*InetAddress otherHost = InetAddress.getByName(host);
-                
-                NetworkInterface otherNet = NetworkInterface.getByInetAddress(otherHost);
-                                //get hexadecimal MAC address from otherNet
-                byte[] onetAddr = otherNet.getHardwareAddress();
-                String[] ohex = new String[onetAddr.length];
-                for (int j = 0; j < onetAddr.length; j++) {
-                    ohex[j] = String.format("%02X", onetAddr[i]);
-                }
-                String otherMac = String.join("-", ohex);*/
+            if (InetAddress.getByName(host).isReachable(5000)) {
                 System.out.println("Host IP " + host + " is on the same LAN as JobSeeker.");
             }
         }
@@ -95,6 +82,9 @@ public class FPJobSeeker { //server
                         case "3":
                         case "4":
                         case "5":
+                        case "6":
+                        case "7":
+                        case "8":
                             break;
                         default:
                             badJob = true;
@@ -154,21 +144,37 @@ public class FPJobSeeker { //server
                                 //jobFour();
                                 break;
                             case "5":
-                                InetAddress seekerHost = InetAddress.getLocalHost();
-                                String seekerIp = (seekerHost.getHostAddress()).trim();//local IP address
+                                //Final Project Option 1 Task 1
+                                break;
+                            case "6":
+                                //Final Project Option 1 Task 1
+                                break;
+                            case "7":
+                                //Final Project Option 1 Task 2
+                                InetAddress seekerHost = InetAddress.getByName(jobIp);
                                 NetworkInterface seekerNet = NetworkInterface.getByInetAddress(seekerHost);
                                 //get hexadecimal MAC address from seekerNet
                                 byte[] netAddr = seekerNet.getHardwareAddress();
                                 String[] hex = new String[netAddr.length];
-                                for (int i = 0; i < netAddr.length; i++) {
-                                    hex[i] = String.format("%02X", netAddr[i]);
+                                for (int x = 0; x < netAddr.length; x++) {
+                                    hex[x] = String.format("%02X", netAddr[x]);
                                 }
                                 String seekerMac = String.join("-", hex);
     
-                                System.out.println("JobSeeker is on Host IP " + seekerIp + " with MAC Address " + seekerMac);
+                                System.out.println("JobSeeker is on Host IP " + jobIp + " with MAC Address " + seekerMac);
                                 //get subnet of seekerIp
-                                String subnet = seekerIp.substring(0, seekerIp.lastIndexOf("."));
-                                spyNeighbors(subnet);
+                                String lan = jobIp.substring(0, jobIp.lastIndexOf("."));
+                                spyNeighbors(lan);
+                                break;
+                            case "8":
+                                //Final Project Option 1 Task 2
+                                seekerHost = InetAddress.getLocalHost();
+                                String seekerIp = (seekerHost.getHostAddress()).trim();//local IP address, JobSeeker is on local device
+                                String creatorIp = jobIp;
+                                System.out.println("JobCreator IP: " + creatorIp + ", JobSeeker IP: " + seekerIp);
+                                if (creatorIp.equals(seekerIp)){
+                                    System.out.println("JobSeeker is on the same device, and therefore same LAN, as JobCreator.");
+                                }
                                 break;
                             default:
                                 pr.println("Error. Job not assigned.");
@@ -190,7 +196,7 @@ public class FPJobSeeker { //server
                 System.out.println("Error. JobCreator disconnected.");
             }
             //if job type is 1 or 2, there is only 1 JobSeeker, so exit while loop
-            if (jobString.equalsIgnoreCase("1") || jobString.equalsIgnoreCase("2") || jobString.equalsIgnoreCase("5") ) {
+            if (jobString.equalsIgnoreCase("1") || jobString.equalsIgnoreCase("2") || jobString.equalsIgnoreCase("6") ) {
                 i = 3;
             }
             //otherwise go to next JobSeeker for job types 3 and 4
