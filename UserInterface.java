@@ -13,7 +13,7 @@ public class UserInterface {
             System.out.println("Enter any key to continue");
             System.out.println("Enter -1 to exit");
             try {
-                choice = Integer.parseInt(sc.nextLine());
+                choice = sc.nextInt();
             }catch(Exception e){
                 choice = 0;
             }
