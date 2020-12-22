@@ -1,4 +1,4 @@
-Intellij Intrsuctions on adding JAR 
+Intellij Instructions on adding JAR
 
 Open file tab
 Go to project structure
