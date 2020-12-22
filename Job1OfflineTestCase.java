@@ -8,14 +8,14 @@ import java.net.*;
 import java.io.*;
 import java.util.Scanner;
 
-public class FPJobCreator {
+public class Job1OfflineTestCase {
 
     public static void main(String[] args) throws IOException {
         String jobType = "0";// initialize
         String ip;
         int port;
         boolean isJobDone = false;
-        
+
         int[] servers = {4999, 4998, 4997};//allows 3 different sockets for 3 different JobSeekers
         int i = 0;
         int count = 0;
@@ -24,7 +24,7 @@ public class FPJobCreator {
         while (i < 3 && count < maxTries) {
             try {
                 //prep to store in file
-                PrintStream output = new PrintStream(new FileOutputStream("output.txt"));
+                PrintStream output = new PrintStream(new FileOutputStream("outputJ1testOffline.txt"));
 
                 Socket s = new Socket("localhost", servers[i]);
                 System.out.println("Socket connected.");
@@ -35,14 +35,14 @@ public class FPJobCreator {
                 Scanner sc3 = new Scanner(System.in);
                 //get job from user. one of the 4 types
                 System.out.println("=== MENU === \n"
-                    + "1 = Detect if an IP address/host name is online \n"
-                    + "2 = Detect the status of a port at an IP address \n"
-                    + "3 = Find JobSeekers on the same LAN as JobCreator. Report IP and MAC addresses of all live hosts sharing JobSeeker's LAN. \n"
-                    + "4 = Execute a TCP flood attack against a port at an IP address \n"
-                    + "\t\t Warning: Doing this against a valid IP address may count as an illegal DDoS attack. Please use dummy IP 0.0.0.0 \n"
-                    + "5 = Traceroute between JobSeeker and another node in the network. Find the nearest JobSeeker(s) to the target node. \n"
-                    + "6 = Execute an ICMP flood attack against a port at an IP address \n"
-                    + "\t\t Warning: Doing this against a valid IP address may count as an illegal DDoS attack. Please use dummy IP 0.0.0.0. \n");
+                        + "1 = Detect if an IP address/host name is online \n"
+                        + "2 = Detect the status of a port at an IP address \n"
+                        + "3 = Find JobSeekers on the same LAN as JobCreator. Report IP and MAC addresses of all live hosts sharing JobSeeker's LAN. \n"
+                        + "4 = Execute a TCP flood attack against a port at an IP address \n"
+                        + "\t\t Warning: Doing this against a valid IP address may count as an illegal DDoS attack. Please use dummy IP 0.0.0.0 \n"
+                        + "5 = Traceroute between JobSeeker and another node in the network. Find the nearest JobSeeker(s) to the target node. \n"
+                        + "6 = Execute an ICMP flood attack against a port at an IP address \n"
+                        + "\t\t Warning: Doing this against a valid IP address may count as an illegal DDoS attack. Please use dummy IP 0.0.0.0. \n");
                 output.println("=== MENU === \n"
                         + "1 = Detect if an IP address/host name is online \n"
                         + "2 = Detect the status of a port at an IP address \n"
@@ -54,7 +54,8 @@ public class FPJobCreator {
                         + "\t\t Warning: Doing this against a valid IP address may count as an illegal DDoS attack. Please use dummy IP 0.0.0.0. \n");
                 System.out.print("Job: ");
                 output.print("Job: ");
-                jobType = sc.nextLine();
+                jobType = "1";// jobType is 1 for test case of job 1
+                System.out.println(jobType);
                 output.println(jobType);
                 pr.println(jobType);
                 pr.flush();
@@ -62,7 +63,7 @@ public class FPJobCreator {
                 if (!jobType.equalsIgnoreCase("3")) {
                     System.out.print("Enter an IP Address/host name: ");
                     output.print("Enter an IP Address/host name: ");
-                    ip = sc2.nextLine();
+                    ip = "www.gotoafakewebsite.com";// invalid hostname for test case, should report as offline
                     output.println(ip);
                 }
                 else {
@@ -119,5 +120,5 @@ public class FPJobCreator {
             }
         }
     }
-    
+
 }
