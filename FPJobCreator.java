@@ -15,8 +15,10 @@ public class FPJobCreator {
         
         int[] servers = {4999, 4998, 4997};//allows 3 different sockets for 3 different JobSeekers
         int i = 0;
+        int count = 0;
+        in maxTries = 3;
         //loop for multiple JobSeekers
-        while (i < 3) {
+        while (i < 3 && count < maxTries) {
             try {
                 System.out.println("Inside while loop.\n");
                 
@@ -77,6 +79,7 @@ public class FPJobCreator {
                 if (jobDoneNum == 1) {
                     isJobDone = true;
                 }
+                count++;
             } catch (IOException e) {
                 System.out.println("Connection failed. Abort");
             }
