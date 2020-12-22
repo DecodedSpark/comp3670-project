@@ -10,7 +10,7 @@ public class HandleTraceroute
         System.out.println("Handling case 5");
         TraceRouteUtility traceRouteUtility = new TraceRouteUtility(InetAddress.getByName(jobIp),pr);
         int numberOfHops = traceRouteUtility.getNumberOfHopsBetweenNodes();
-        pr.println("Distance between target node and nearest Job Seeker(s): "+numberOfHops +" hops away.");
+        pr.println("Distance between target node and nearest Job Seeker(s): "+ numberOfHops +" hops away.");
 
     }
 

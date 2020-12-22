@@ -22,6 +22,7 @@ public class UserInterface {
                 exitFlag = true;
             }else{
                 runFPJobCreator();
+                exitFlag = true;
             }
 
         }while(!exitFlag);

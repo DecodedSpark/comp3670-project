@@ -7,6 +7,7 @@ import java.util.*;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.io.IOException;
+import org.pcap4j.packet.*;
 //job seeker waits for jobSeeker to connect, accepts job request, does job, reports back
 public class FPJobSeeker { //server
     public static void main(String[] args) throws Exception {
@@ -16,7 +17,7 @@ public class FPJobSeeker { //server
         boolean badJob = false;
         boolean jobDone = false;
         //code to incorporate pcap4j packet building
-        /*IcmpV4EchoPacket.Builder echoBuilder = new IcmpV4EchoPacket.Builder();
+        IcmpV4EchoPacket.Builder echoBuilder = new IcmpV4EchoPacket.Builder();
         echoBuilder
                 .identifier((short) 1);
 
@@ -26,7 +27,7 @@ public class FPJobSeeker { //server
                 .code(IcmpV4Code.NO_CODE)
                 .payloadBuilder(echoBuilder)
                 .correctChecksumAtBuild(true);
-        */        
+
         //code for connection
         Socket s = new Socket();
         int[] servers ={4999, 4998, 4997} ;//allows 3 different sockets for 3 different JobSeekers
@@ -71,7 +72,6 @@ public class FPJobSeeker { //server
                         case "4":
                         case "5":
                         case "6":
-                        case "7":
                             break;
                         default:
                             badJob = true;
@@ -87,7 +87,7 @@ public class FPJobSeeker { //server
                         pr.flush();
                     } else {
                         //prep pcap4j for packet building
-                        /*IpV4Packet.Builder ipv4Builder = new IpV4Packet.Builder();
+                        IpV4Packet.Builder ipv4Builder = new IpV4Packet.Builder();
                         try {
                             ipv4Builder
                                     .version(IpVersion.IPV4)
@@ -102,7 +102,7 @@ public class FPJobSeeker { //server
                                     .correctLengthAtBuild(true);
                         } catch (UnknownHostException e) {
                             e.printStackTrace();
-                        }*/
+                        }
                         //do the job based on job type
                         //assign part of create-assign-execute-report process for each job
                         switch (jobString) {
@@ -129,21 +129,15 @@ public class FPJobSeeker { //server
                                 break;
                             case "4":
                                 //assign 4th job to JobSeeker, Q2 Job 2
-                                //jobFour();
+                                jobFour();
                                 break;
                             case "5":
                                 //Final Project Option 1 Task 1
                                 HandleTraceroute Htr5 = new HandleTraceroute(pr, jobIp);
                                 break;
-
-                                //TODO Merge case 5 and 6 into one task.
                             case "6":
-                                //Final Project Option 1 Task 1
-                                HandleTraceroute Htr6 = new HandleTraceroute(pr, jobIp);
-                                break;
-                            case "7":
                                 //assign 3rd job to JobSeeker, Q2 Job 1
-                                //jobThree();
+                                jobSix();
                                 break;
                             default:
                                 pr.println("Error. Job not assigned.");
@@ -185,7 +179,7 @@ public class FPJobSeeker { //server
     //execute part of create-assign-execute-report process for A3P2Q1 Job 2
     public static String portStatus(String jobIp, String jobPort) {
         int port = Integer.parseInt(jobPort);
-        Socket sckt = null;//create socket variable
+        Socket sckt;//create socket variable
         String status = "unknown";
         try {
             System.out.println("Inside portStatus try loop.");
@@ -245,7 +239,7 @@ public class FPJobSeeker { //server
 
     public static void jobThree () {
         //execute part of create-assign-execute-report process for A3P2Q2 Job 1
-        /*InetAddress localHost = InetAddress.getLocalHost();
+        InetAddress localHost = InetAddress.getLocalHost();
         Packet p = ipv4Builder.build();
         //create handle
         PcapNetworkInterface nif = Pcaps.getDevByAddress(localHost);
@@ -255,46 +249,46 @@ public class FPJobSeeker { //server
         PcapHandle handle = nif.openLive(snapLen, mode, timeout);
         try {
             handle.sendPacket(p);
-        } catch (PcapNativeException | NotOpenException e) {
+        } catch (PcapNativeException || NotOpenException e) {
             e.printStackTrace();
         }
         //if successful, continuously send the packet for ICMP attack
         while (true) {
             try {
                 handle.sendPacket(p);
-            } catch (PcapNativeException | NotOpenException e) {
+            } catch (PcapNativeException || NotOpenException e) {
                 e.printStackTrace();
             }
-        }*/
+        }
     }
 
-    public static void jobFour() {
+    public static void jobSix() {
         //execute part of create-assign-execute-report process for A3P2Q2 Job 2
-                                /*InetAddress localHost = InetAddress.getLocalHost();
-                                //create tcp packet
-                                Packet tcpp;
-                                tcpp.getBuilder().get(TcpPacket.Builder.class).srcAddr(tcpp.get(IpV4Packet.class).getHeader().getSrcAddr());
-                                tcpp.getBuilder().get(TcpPacket.Builder.class).dstAddr(tcpp.get(IpV4Packet.class).getHeader().getDstAddr());
-                                tcpp.getBuilder().get(TcpPacket.Builder.class).correctChecksumAtBuild(true);
-                                tcpp.getBuilder().build();
-                                //create handle
-                                PcapNetworkInterface nif = Pcaps.getDevByAddress(localHost);
-                                int snapLen = 65530;
-                                PromiscuousMode mode = PromiscuousMode.PROMISCUOUS;
-                                int timeout = 20;
-                                PcapHandle handle = nif.openLive(snapLen, mode, timeout);
-                                try {
-                                    handle.sendPacket(tcpp);
-                                } catch (PcapNativeException | NotOpenException e) {
-                                    e.printStackTrace();
-                                }
-                                //if successful, continuously send the packet for TCP attack
-                                while (true) {
-                                    try {
-                                        handle.sendPacket(tcpp);
-                                    } catch (PcapNativeException | NotOpenException e) {
-                                        e.printStackTrace();
-                                    }
-                                }*/
+        InetAddress localHost = InetAddress.getLocalHost();
+        //create tcp packet
+        Packet tcpp;
+        tcpp.getBuilder().get(TcpPacket.Builder.class).srcAddr(tcpp.get(IpV4Packet.class).getHeader().getSrcAddr());
+        tcpp.getBuilder().get(TcpPacket.Builder.class).dstAddr(tcpp.get(IpV4Packet.class).getHeader().getDstAddr());
+        tcpp.getBuilder().get(TcpPacket.Builder.class).correctChecksumAtBuild(true);
+        tcpp.getBuilder().build();
+        //create handle
+        PcapNetworkInterface nif = Pcaps.getDevByAddress(localHost);
+        int snapLen = 65530;
+        PromiscuousMode mode = PromiscuousMode.PROMISCUOUS;
+        int timeout = 20;
+        PcapHandle handle = nif.openLive(snapLen, mode, timeout);
+        try {
+            handle.sendPacket(tcpp);
+        } catch (PcapNativeException || NotOpenException e) {
+            e.printStackTrace();
+        }
+        //if successful, continuously send the packet for TCP attack
+        while (true) {
+            try {
+                handle.sendPacket(tcpp);
+            } catch (PcapNativeException || NotOpenException e) {
+            e.printStackTrace();
+            }
+        }
     }
 }

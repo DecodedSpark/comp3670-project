@@ -33,28 +33,27 @@ public class FPJobCreator {
                     + "3 = Find JobSeekers on the same LAN as JobCreator. Report IP and MAC addresses of all live hosts sharing JobSeeker's LAN. \n"
                     + "4 = Execute a TCP flood attack against a port at an IP address \n"
                     + "\t\t Warning: Doing this against a valid IP address may count as an illegal DDoS attack. Please use dummy IP 0.0.0.0 \n"
-                    + "5 = Traceroute between JobSeeker and another node in the network \n"
-                    + "6 = Find the nearest JobSeeker(s) to the target node \n"
-                    + "7 = Execute an ICMP flood attack against a port at an IP address \n"
-                    + "\t\t Warning: Doing this against a valid IP address may count as an illegal DDoS attack. Please use dummy IP 0.0.0.0. \n"
-                    + "8 = \n");
+                    + "5 = Traceroute between JobSeeker and another node in the network. Find the nearest JobSeeker(s) to the target node. \n"
+                    + "6 = Execute an ICMP flood attack against a port at an IP address \n"
+                    + "\t\t Warning: Doing this against a valid IP address may count as an illegal DDoS attack. Please use dummy IP 0.0.0.0. \n");
                 System.out.print("Job Type: ");
                 jobType = sc.nextLine();
                 pr.println(jobType);
                 pr.flush();
                 //get ip address from user
-                System.out.println("Enter an IP Address/host name:");
-                if (!jobType.equalsIgnoreCase("3") && !jobType.equalsIgnoreCase("7")) {
+                if (!jobType.equalsIgnoreCase("3")) {
+                    System.out.print("Enter an IP Address/host name: ");
                     ip = sc2.nextLine();
                 }
                 else {
+                    System.out.print("JobSeeker IP Address: ");
                     ip = (InetAddress.getLocalHost().getHostAddress()).trim();//local IP address
-                    System.out.println(ip);
+                    System.out.println(ip + " (localhost)");
                 }
                 pr.println(ip);
                 pr.flush();
-                //If job type is neither 1 nor 5, get port number from user
-                if (!jobType.equalsIgnoreCase("1") && !jobType.equalsIgnoreCase("3") && !jobType.equalsIgnoreCase("7")) {
+                //If job type is not 1, 3 or 5, get port number from user
+                if (!jobType.equalsIgnoreCase("1") && !jobType.equalsIgnoreCase("3") && !jobType.equalsIgnoreCase("5")) {
                     System.out.println("Enter a port number:");
                     port = sc3.nextInt();
                     pr.println(port);
@@ -80,8 +79,8 @@ public class FPJobCreator {
             } catch (IOException e) {
                 System.out.println("Connection failed. Abort");
             }
-            //if job type is neither 3 or 4, there is only 1 JobSeeker, so exit while loop
-            if (!jobType.equalsIgnoreCase("4") && !jobType.equalsIgnoreCase("7")) {
+            //if job type is neither 4 nor 6, there is only 1 JobSeeker. Exit while loop
+            if (!jobType.equalsIgnoreCase("4") && !jobType.equalsIgnoreCase("6")) {
                 i = 3;
             }
             //otherwise go to next JobSeeker for job types 3 and 4
