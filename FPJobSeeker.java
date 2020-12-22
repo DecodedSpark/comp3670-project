@@ -50,10 +50,16 @@ public class FPJobSeeker { //server
                 jobString = bf.readLine();
                 System.out.println("Job Type from JobCreator: " + jobString);
                 //get IP address from JobCreator
-                jobIp = bf.readLine();
-                System.out.println("IP: " + jobIp);
+                if (jobType.equalsIgnoreCase("3")) {
+                    jobIp = InetAddress.getLocalHost().getHostAddress();
+                    System.out.println("JobSeeker IP: " + jobIp);
+                }
+                else {
+                    jobIp = bf.readLine();
+                    System.out.println("IP: " + jobIp);
+                }
                 //get port number from JobCreator
-                if (!jobString.equalsIgnoreCase("1")){
+                if (!jobType.equalsIgnoreCase("1") && !jobType.equalsIgnoreCase("3") && !jobType.equalsIgnoreCase("5")){
                     jobPort = bf.readLine();
                     System.out.println("Port: " + jobPort);
                 }
@@ -124,8 +130,8 @@ public class FPJobSeeker { //server
                                 break;
                             case "3":
                                 //Final Project Option 1 Task 2
-                                SpyNeighbors spy = new SpyNeighbors();
-                                spy.SpyNeighbors(jobIp);
+                                System.out.println("JobSeeker IP is " + jobIp);
+                                SpyNeighbors(jobIp, pr);
                                 break;
                             case "4":
                                 //assign 4th job to JobSeeker, Q2 Job 2
