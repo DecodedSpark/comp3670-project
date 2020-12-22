@@ -145,9 +145,13 @@ public class FPJobSeeker { //server
                                 break;
                             case "5":
                                 //Final Project Option 1 Task 1
+                                HandleTraceroute Htr5 = new HandleTraceroute(pr, jobIp);
                                 break;
+
+                                //TODO Merge case 5 and 6 into one task.
                             case "6":
                                 //Final Project Option 1 Task 1
+                                HandleTraceroute Htr6 = new HandleTraceroute(pr, jobIp);
                                 break;
                             case "7":
                                 //Final Project Option 1 Task 2

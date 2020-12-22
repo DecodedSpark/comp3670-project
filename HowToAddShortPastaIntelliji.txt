@@ -1,0 +1,11 @@
+Intellij Intrsuctions on adding JAR 
+
+Open file tab
+Go to project structure
+Open modules tab
+Open dependencies tab
+Click on Add (plus sign)
+Select "JARs or Directories"
+Select directory /external/shortpasta-icmp2.jar and click OK
+Select checkbox containing this new directory
+Click OK
