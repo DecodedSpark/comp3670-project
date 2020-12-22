@@ -124,8 +124,8 @@ public class FPJobSeeker { //server
                                 break;
                             case "3":
                                 //Final Project Option 1 Task 2
-                                JobFive j5 = new JobFive();
-                                j5.main(null);
+                                JobFive job5 = new JobFive();
+                                job5.main(null);
                                 break;
                             case "4":
                                 //assign 4th job to JobSeeker, Q2 Job 2
