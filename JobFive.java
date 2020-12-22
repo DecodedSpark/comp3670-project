@@ -7,12 +7,12 @@ import java.io.IOException;
 
 public class JobFive {
    public static void spyNeighbors(String lan) throws IOException {
-        System.out.println("NOTE:\tYou can only find the MAC Address of the localhost using Java, not those of remote hosts in the same network."
+        System.out.println("\nNOTE:\tYou can only find the MAC Address of the localhost using Java, not those of remote hosts in the same network."
         + "\n\tThat means that JobSeeker.java cannot report the MAC addresses of other live hosts sharing its LAN, it can only report their IP addresses.\n");
         for (int i = 1; i < 255; i++) {
             String hostIp = lan + "." + i;//get ip address
             if (InetAddress.getByName(hostIp).isReachable(5000)) {
-                System.out.println("IP Address " + hostIp + " is a live host the same LAN as JobSeeker.");
+                System.out.println("IP Address " + hostIp + " is a live host on the same LAN as JobSeeker.");
             }
         }
     }
@@ -29,8 +29,8 @@ public class JobFive {
         }
         String seekerMac = String.join("-", hex);
        
-        System.out.println("All JobSeekers are on the same device, and therefore the same LAN, as the JobCreator.");
-        System.out.println("The JobSeeker has IP Address " + seekerIp + " aand MAC Address " + seekerMac);
+        System.out.println("\nAll JobSeekers are on the same device, and therefore the same LAN, as the JobCreator.");
+        System.out.println("\nThe JobSeeker has IP Address " + seekerIp + " and MAC Address " + seekerMac);
         //get subnet of seekerIp
         String subnet = seekerIp.substring(0, seekerIp.lastIndexOf("."));
         spyNeighbors(subnet);//spy on neighbors

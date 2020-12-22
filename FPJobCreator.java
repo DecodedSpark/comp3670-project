@@ -30,14 +30,14 @@ public class FPJobCreator {
                 System.out.println("=== MENU === \n"
                     + "1 = Detect if an IP address/host name is online \n"
                     + "2 = Detect the status of a port at an IP address \n"
-                    + "3 = Execute an ICMP flood attack against a port at an IP address \n"
-                    + "\t\t Warning: Doing this against a valid IP address may count as an illegal DDoS attack. Please use dummy IP 0.0.0.0. \n"
+                    + "3 = Find JobSeekers on the same LAN as JobCreator. Report IP and MAC addresses of all live hosts sharing JobSeeker's LAN. \n"
                     + "4 = Execute a TCP flood attack against a port at an IP address \n"
                     + "\t\t Warning: Doing this against a valid IP address may count as an illegal DDoS attack. Please use dummy IP 0.0.0.0 \n"
                     + "5 = Traceroute between JobSeeker and another node in the network \n"
                     + "6 = Find the nearest JobSeeker(s) to the target node \n"
-                    + "7 = Report IP and MAC addresses of all live hosts connected to the same LAN as you \n"
-                    + "8 = Find if JobSeeker is on the same LAN as JobCreator \n");
+                    + "7 = Execute an ICMP flood attack against a port at an IP address \n"
+                    + "\t\t Warning: Doing this against a valid IP address may count as an illegal DDoS attack. Please use dummy IP 0.0.0.0. \n"
+                    + "8 = \n");
                 System.out.print("Job Type: ");
                 jobType = sc.nextLine();
                 pr.println(jobType);
