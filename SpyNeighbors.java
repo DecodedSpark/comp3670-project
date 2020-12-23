@@ -5,36 +5,13 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.PrintStream;
+import java.io.FileWriter;
+import java.io.FileOutputStream;
 
 public class SpyNeighbors {
-    //for running with PrintWriter
-    SpyNeighbors(String seekerIp, PrintWriter pr) throws IOException {
-        //get local IP and MAC addresses
-        NetworkInterface seekerNet = NetworkInterface.getByInetAddress(InetAddress.getByName(seekerIp));
-        //convert to hexadecimal MAC address string
-        byte[] netAddr = seekerNet.getHardwareAddress();
-        String[] hex = new String[netAddr.length];
-        for (int x = 0; x < netAddr.length; x++) {
-            hex[x] = String.format("%02x", netAddr[x]);
-        }
-        String seekerMac = String.join("-", hex);
-
-        pr.println("\nAll JobSeekers are on the same device, and therefore the same LAN, as the JobCreator.");
-        pr.println("\nThe JobSeeker has IP Address " + seekerIp + " and MAC Address " + seekerMac);
-        //get subnet of seekerIp
-        String lan = seekerIp.substring(0, seekerIp.lastIndexOf("."));
-
-        pr.println("\nNOTE:\tYou can only find the MAC Address of the localhost using Java, not those of remote hosts in the same network."
-                + "\n\tThat means that JobSeeker.java cannot report the MAC addresses of other live hosts sharing its LAN, it can only report their IP addresses.\n");
-        for (int i = 1; i < 255; i++) {
-            String hostIp = lan + "." + i;//get ip address
-            if (InetAddress.getByName(hostIp).isReachable(5000)) {
-                pr.println("IP Address " + hostIp + " is a live host on the same LAN as JobSeeker.");
-            }
-        }
-    }
     //for testing without PrintWriter
-    public static void SpyNeighbors(String seekerIp) throws IOException {
+    public static void SpyNeighbors(String seekerIp, PrintStream output) throws IOException {
         //get local IP and MAC addresses
         NetworkInterface seekerNet = NetworkInterface.getByInetAddress(InetAddress.getByName(seekerIp));
         //convert to hexadecimal MAC address string
@@ -46,23 +23,32 @@ public class SpyNeighbors {
         String seekerMac = String.join("-", hex);
 
         System.out.println("\nAll JobSeekers are on the same device, and therefore the same LAN, as the JobCreator.");
+        output.println("\nAll JobSeekers are on the same device, and therefore the same LAN, as the JobCreator.");
         System.out.println("\nThe JobSeeker has IP Address " + seekerIp + " and MAC Address " + seekerMac);
+        output.println("\nThe JobSeeker has IP Address " + seekerIp + " and MAC Address " + seekerMac);
         //get subnet of seekerIp
         String lan = seekerIp.substring(0, seekerIp.lastIndexOf("."));
 
         System.out.println("\nNOTE:\tYou can only find the MAC Address of the localhost using Java, not those of remote hosts in the same network."
                 + "\n\tThat means that JobSeeker.java cannot report the MAC addresses of other live hosts sharing its LAN, it can only report their IP addresses.\n");
+        output.println("\nNOTE:\tYou can only find the MAC Address of the localhost using Java, not those of remote hosts in the same network."
+                + "\n\tThat means that JobSeeker.java cannot report the MAC addresses of other live hosts sharing its LAN, it can only report their IP addresses.\n");
         for (int i = 1; i < 255; i++) {
             String hostIp = lan + "." + i;//get ip address
             if (InetAddress.getByName(hostIp).isReachable(5000)) {
                 System.out.println("IP Address " + hostIp + " is a live host on the same LAN as JobSeeker.");
+                output.println("IP Address " + hostIp + " is a live host on the same LAN as JobSeeker.");
             }
         }
     }
 
     public static void main (String[] args) throws Exception {
         String testIp = InetAddress.getLocalHost().getHostAddress();
-        SpyNeighbors(testIp);//spy on neighbors
+        //prep to store in file
+        PrintStream spyOutput = new PrintStream(new FileOutputStream("spyOutput.txt"));
+        SpyNeighbors(testIp, spyOutput);//spy on neighbors
+        //close file
+        spyOutput.close();
     }
     
 }

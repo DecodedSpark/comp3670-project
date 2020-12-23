@@ -130,12 +130,15 @@ public class FPJobSeeker { //server
                                 break;
                             case "3":
                                 //Final Project Option 1 Task 2
-                                System.out.println("JobSeeker IP is " + jobIp);
-                                SpyNeighbors(jobIp, pr);
+                                pr.println("The output of this job is stored separately in a file called spyOutput.txt");
+                                pr.flush();
+                                SpyOnNeighbors();
                                 break;
                             case "4":
                                 //assign 4th job to JobSeeker, Q2 Job 2
                                 jobFour();
+                                pr.println("TCP flood");
+                                pr.flush();
                                 break;
                             case "5":
                                 //Final Project Option 1 Task 1
@@ -144,6 +147,8 @@ public class FPJobSeeker { //server
                             case "6":
                                 //assign 3rd job to JobSeeker, Q2 Job 1
                                 jobSix();
+                                pr.println("ICMP flood");
+                                pr.flush();
                                 break;
                             default:
                                 pr.println("Error. Job not assigned.");
@@ -175,6 +180,13 @@ public class FPJobSeeker { //server
         }
     }
 
+    private static void SpyOnNeighbors () throws Exception {
+        try {
+            SpyNeighbors.main(null);
+        }catch(Exception e){
+            System.out.println("Final Project Task 2 failed");
+        }
+    }
     //job 1 = check if given IP address is online or not
     //execute part of create-assign-execute-report process for A3P2Q1 Job 1
     public static boolean isOnline(String jobIp) throws IOException {

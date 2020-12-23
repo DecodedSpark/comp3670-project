@@ -1,0 +1,18 @@
+Comp-3670 Final Project
+--------------------
+
+Would you like to traceroute or
+spy on your neighbours?
+Enter -1 to exit
+Enter 1 to test Job 1: Check if JobSeeker can correctly report an IP address as online
+Enter 2 to test Job 1: Check if JobSeeker can correctly report an IP address as offline
+Enter 3 to test Job 2: Detect the status of a given port at a given IP address
+Enter 4 to test Job 3: Find all live hosts on the same LAN as JobSeeker
+Enter 6 to test Job 5: Traceroute between JobSeeker and another node in the network
+Enter 7 to test Job 6: Execute an ICMP flood attack against a port at an IP address
+Enter any other key to continue normally
+Choice: 1
+
+Make sure the server is online.
+Run FPJobSeeker before continuing
+Enter any key when ready
