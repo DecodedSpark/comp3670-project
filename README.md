@@ -59,6 +59,9 @@ There were a few bugs when running the program.
 2) For some reason, even though testing SpyNeighbors.java directly proves that the code for Task 2 works
    correctly, FPJobSeeker.java fails to call on SpyNeighbors.java when the job is assigned. FPJobSeeker
    instead appears to enter an infinite loop. Hours of debugging failed to solve the issue.
+   
+3) The bonus code for Task 4 does not seem to work properly. It does not make the application continue from where
+   it left off in the event of a crash.
 
 
 ====== DEPLOYMENT & TESTING INSTRUCTIONS ======
