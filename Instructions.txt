@@ -1,11 +1,50 @@
-Intellij Instructions on adding JAR
+====== DEPLOYMENT & TESTING INSTRUCTIONS ======
 
-Open file tab
-Go to project structure
-Open modules tab
-Open dependencies tab
-Click on Add (plus sign)
-Select "JARs or Directories"
-Select directory /external/shortpasta-icmp2.jar and click OK
-Select checkbox containing this new directory
-Click OK
+==== Deployment Instructions ====
+Before running the application, you must install two packages:
+                Pcap4J (org.pcap4j.packet) and
+                ShortPasta (org.shortpasta.icmp2)
+
+== How To Add Pcap4J Package ==
+
+1) From the main menu, select "File" > "Project Structure" and click "Libraries".
+2) Click "+" button to add, and select "From Maven".
+3) Click the magnifying glass and search "pcap4j".
+4) Find "org.pcap4j:pcap4j-core:1.7.5" and install.
+5) Under the "Dependencies" tab, check the checkbox for this new package to be allowed.
+6) Click OK.
+7) In the pom.xml file, enter these dependencies:
+            <dependency>
+              <groupId>org.pcap4j</groupId>
+              <artifactId>pcap4j-core</artifactId>
+              <version>[1.0, 2.0)</version>
+            </dependency>
+            <dependency>
+              <groupId>org.pcap4j</groupId>
+              <artifactId>pcap4j-packetfactory-static</artifactId>
+              <version>[1.0, 2.0)</version>
+            </dependency>
+8) You are now ready to use Pcap4J.
+
+== How To Add ShortPasta Package ==
+
+1) From the main menu, select "File" > "Project Structure" and click "Modules".
+2) Open "Dependencies" tab.
+3) Click on "+" to add, and select "JARs or Directories".
+4) Locate your project directory, enter its path followed by "/external/shortpasta-icmp2.jar" and click OK.
+        (Or just go to the folder "external" and the file is there.)
+5) Check the checkbox for this new package to be allowed.
+6) Click OK.
+7) You can now use ShortPasta.
+
+==== Testing Instructions ====
+
+1) Except for SpyNeighbors.java, all jobs can be tested directly by running UserInterface.java and
+   following the instructions.
+2) SpyNeighbors.java, the code behind Job 3, can be tested by compiling and running directly in the terminal.
+3) Each of the 6 jobs have their own specific test case Java files.
+4) Each test case saves its output to its own separate TXT file.
+5) UserInterface.java also saves its output to a file called outputInterface.txt.
+6) FPJobCreator.java saves its output to a file called output.txt.
+7) SpyNeighbors.java saves its output to a file called spyOutput.txt.
+8) The screenshots of the test case runs are all contained in the folder called "Test Runs".

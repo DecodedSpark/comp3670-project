@@ -19,9 +19,9 @@ public class FPJobCreator {
         int[] servers = {4999, 4998, 4997};//allows 3 different sockets for 3 different JobSeekers
         int i = 0;
         int count = 0;
-        int maxTries = 3;
+        int maxTries = 3;//this is for the bonus task in option 1 of the final project
         //loop for multiple JobSeekers
-        while (i < 3 && count < maxTries) {
+        while (i < 3 && count < maxTries) {//count is supposed to allow this to run 3 times in case it fails on a previous run
             try {
                 //prep to store in file
                 PrintStream output = new PrintStream(new FileOutputStream("output.txt"));

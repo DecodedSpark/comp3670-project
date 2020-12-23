@@ -24,7 +24,7 @@ public class Job1OfflineTestCase {
         while (i < 3 && count < maxTries) {
             try {
                 //prep to store in file
-                PrintStream output = new PrintStream(new FileOutputStream("outputJ1testOffline.txt"));
+                PrintStream output = new PrintStream(new FileOutputStream("outputJ1testOnline.txt"));
 
                 Socket s = new Socket("localhost", servers[i]);
                 System.out.println("Socket connected.");
@@ -63,7 +63,7 @@ public class Job1OfflineTestCase {
                 if (!jobType.equalsIgnoreCase("3")) {
                     System.out.print("Enter an IP Address/host name: ");
                     output.print("Enter an IP Address/host name: ");
-                    ip = "www.gotoafakewebsite.com";// invalid hostname for test case, should report as offline
+                    ip = "0.0.0.0";// invalid ip for test case, should report as offline
                     output.println(ip);
                 }
                 else {

@@ -1,0 +1,13 @@
+
+All JobSeekers are on the same device, and therefore the same LAN, as the JobCreator.
+
+The JobSeeker has IP Address 192.168.2.18 and MAC Address a0-a8-cd-d6-3c-88
+
+NOTE:	You can only find the MAC Address of the localhost using Java, not those of remote hosts in the same network.
+	That means that JobSeeker.java cannot report the MAC addresses of other live hosts sharing its LAN, it can only report their IP addresses.
+
+IP Address 192.168.2.1 is a live host on the same LAN as JobSeeker.
+IP Address 192.168.2.11 is a live host on the same LAN as JobSeeker.
+IP Address 192.168.2.13 is a live host on the same LAN as JobSeeker.
+IP Address 192.168.2.14 is a live host on the same LAN as JobSeeker.
+IP Address 192.168.2.18 is a live host on the same LAN as JobSeeker.

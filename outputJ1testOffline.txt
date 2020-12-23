@@ -10,8 +10,8 @@ Socket connected.
 		 Warning: Doing this against a valid IP address may count as an illegal DDoS attack. Please use dummy IP 0.0.0.0. 
 
 Job: 1
-Enter an IP Address/host name: 0.0.0.0
+Enter an IP Address/host name: www.gotoafakewebsite.com
 JobSeeker: RECEIVED. Job Type: 1
 
-JobSeeker: IP: 0.0.0.0, Port: Not Applicable
-This IP Address/hostname is offline.
+JobSeeker: IP: www.gotoafakewebsite.com, Port: Not Applicable
+null

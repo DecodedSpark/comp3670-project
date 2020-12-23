@@ -9,9 +9,5 @@ Socket connected.
 6 = Execute an ICMP flood attack against a port at an IP address 
 		 Warning: Doing this against a valid IP address may count as an illegal DDoS attack. Please use dummy IP 0.0.0.0. 
 
-Job: 1
-Enter an IP Address/host name: 0.0.0.0
-JobSeeker: RECEIVED. Job Type: 1
-
-JobSeeker: IP: 0.0.0.0, Port: Not Applicable
-This IP Address/hostname is offline.
+Job: 3
+JobSeeker IP Address: 192.168.2.18 (localhost)
